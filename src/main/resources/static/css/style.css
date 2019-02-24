@@ -1,0 +1,62 @@
+#bottom {
+	padding-bottom: 1em;
+	padding-top: 1em;
+}
+#middle {
+	margin: 1em 1em 1em 1em;
+}
+#navigation {
+	background: linear-gradient(peachpuff, tan);
+	border-bottom: 1px solid black;
+	border-top: 1px solid black;
+	color: white;
+	width: 100%;
+}
+#navigation_contents a {
+	color: white;
+	font-size: large;
+	font-weight: bold;
+	text-decoration: none;
+}
+#navigation_contents a:hover {
+	color: black;
+	font-size: large;
+	font-weight: bold;
+	text-decoration: underline;
+}
+#navigation_contents {
+	padding: 1em 1em 1em 1em;
+	width: 800px;
+}
+#restaurant_name {
+	color: silver;
+	font-size: 2em;
+	font-weight: bold;
+	text-decoration: none;
+	text-shadow: 2px 2px black;
+}
+#top {
+	margin: 1em 1em 1em 1em;
+}
+body {
+	background-color: white;
+	color: black;
+	font-family: sans-serif;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+input.number, input.text {
+	border-radius: 4px;
+	border: 1px solid tan;
+	padding: 8px 8px 8px 8px;
+	width: 200px;
+}
+span.currency {
+	color: silver;
+}
+span.field_name {
+	font-weight: bold;
+}
+span.price {
+	color: tan;
+}

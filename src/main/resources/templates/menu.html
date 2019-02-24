@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Halvarsson &amp;CO: The Menu</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link th:href="@{/css/style.css}" rel="STYLESHEET" type="text/css" />
+<style>
+#add_ons {
+	color: mediumseagreen;
+	font-weight: bold;
+}
+img.dish {
+	border: 1px solid black;
+	height: 235px;
+	width: 245px;
+}
+</style>
+</head>
+
+<body>
+<div th:replace="fragments/top :: top"></div>
+<div th:replace="fragments/navigation :: navigation"></div>
+
+<div id="middle">
+<h2>The Menu</h2>
+<table>
+	<tr>
+		<td><img class="dish" th:src="@{/gfx/dishes/salmon_halvarsson.PNG}" alt="Salmon Halvarsson" /></td>
+		<td>
+			<p><strong>Salmon Halvarsson</strong></p>
+			<p>
+			Our famous fishy thing with a twist of Cajun.
+			</p>
+		</td>
+	</tr>
+	<tr>
+		<td><img class="dish" th:src="@{/gfx/dishes/lemming_ragu.PNG}" alt="Lemming Ragu" /></td>
+		<td>
+			<p><strong>Lemming Ragu</strong></p>
+			<p>
+			Nah, just kidding, it's an amazing chicken thing,
+			spicy and rich in flavor.
+			</p>
+		</td>
+	</tr>
+	<tr>
+		<td><img class="dish" th:src="@{/gfx/dishes/five_finger_love_punch.PNG}" alt="Five Finger Love Punch" /></td>
+		<td>
+			<p><strong>Five Finger Love Punch</strong></p>
+			<p>
+			Five finger sized (André the Giant finger size),
+			amazing steak grilled to your pleasure.
+			</p>
+		</td>
+	</tr>
+	<tr>
+		<td><img class="dish" th:src="@{/gfx/dishes/moby_dicks_lasagna.PNG}" alt="Moby Dick's Lasagna" /></td>
+		<td>
+			<p><strong>Moby Dick's Lasagna</strong></p>
+			<p>
+			The Ocean never tasted so good...
+			</p>
+		</td>
+	</tr>
+	<tr>
+		<td><img class="dish" th:src="@{/gfx/dishes/leos_jollof_rice.png}" alt="Leo's Jollof Rice" /></td>
+		<td>
+			<p><strong>Leo's Jollof Rice</strong></p>
+			<p>
+			Ghana stylee.
+			</p>
+		</td>
+	</tr>
+</table>
+<p id="add_ons">
+All dishes served with your choice of add ons:
+French Fries, Rice, Baked Potato, Potato mash, Potato wedges
+</p>
+</div>
+
+<div th:replace="fragments/bottom :: bottom"></div>
+</body>
+</html>

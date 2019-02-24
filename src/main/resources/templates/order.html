@@ -1,0 +1,534 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Halvarsson &amp;CO: New order</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link th:href="@{/css/style.css}" rel="STYLESHEET" type="text/css" />
+<style>
+#main_dishes {
+	width: 1000px;
+}
+.errmsg {
+	color: red;
+	font-weight: bold;
+}
+img.dish {
+	border: 1px solid black;
+	height: 135px;
+	width: 145px;
+}
+</style>
+</head>
+
+<body>
+<div th:replace="fragments/top :: top"></div>
+<div th:replace="fragments/navigation :: navigation"></div>
+
+<div id="middle">
+<h2>Place an order</h2>
+<form action="#" th:action="@{/order}" th:object="${order}" method="post">
+	<table>
+		<tr>
+			<td><span class="field_name">Table no.</span></td>
+			<td th:if="${db_entry == null}">
+				<input class="text" type="text" th:field="*{tableNo}" />
+			</td>
+			<td th:if="${db_entry != null}">
+				<input class="text" type="text" id="tableNo" name="tableNo" th:value="${db_entry.getTableNo()}" />
+			</td>
+			<td class="errmsg" th:if="${#fields.hasErrors('tableNo')}" th:errors="*{tableNo}">
+			</td>
+		</tr>
+		<tr>
+			<td><span class="field_name">Customer</span></td>
+			<td th:if="${db_entry == null}">
+				<input class="text" type="text" th:field="*{customer}" />
+			</td>
+			<td th:if="${db_entry != null}">
+				<input class="text" type="text" id="customer" name="customer" th:value="${db_entry.getCustomer()}" />
+			</td>
+			<td class="errmsg" th:if="${#fields.hasErrors('customer')}" th:errors="*{customer}">
+			</td>
+		</tr>
+	</table>
+
+	<h3>Main dish for customer</h3>
+	<table id="main_dishes">
+		<tr>
+			<td>
+				<!-- ================= -->
+				<!-- Salmon Halvarsson -->
+				<!-- ================= -->
+
+				<h4>Salmon Halvarsson</h4>
+				<div th:if="${db_entry}" th:switch="${db_entry.getDish()}">
+					<span th:case="${T(lexicon.task.Dish).SALMON_HALVARSSON}">
+						<input type="radio" name="dish" value="SALMON_HALVARSSON" checked="checked" />
+					</span>
+					<span th:case="*">
+						<input type="radio" name="dish" value="SALMON_HALVARSSON" />
+					</span>
+				</div>
+				<div th:unless="${db_entry}">
+					<input type="radio" name="dish" value="SALMON_HALVARSSON" />
+				</div>
+				<div th:if="${helper}">
+					<span class="price" th:text="${helper.getMainDishPrice(T(lexicon.task.Dish).SALMON_HALVARSSON)}">
+					</span>
+					<span class="currency" th:text="${helper.getCurrency()}">
+					</span>
+				</div>
+				<p><img class="dish" th:src="@{/gfx/dishes/salmon_halvarsson.PNG}" alt="Salmon Halvarsson" /></p>
+			</td>
+			<td>
+				<!-- ============ -->
+				<!-- Lemming Ragu -->
+				<!-- ============ -->
+
+				<h4>Lemming Ragu</h4>
+				<div th:if="${db_entry}" th:switch="${db_entry.getDish()}">
+					<span th:case="${T(lexicon.task.Dish).LEMMING_RAGU}">
+						<input type="radio" name="dish" value="LEMMING_RAGU" checked="checked" />
+					</span>
+					<span th:case="*">
+						<input type="radio" name="dish" value="LEMMING_RAGU" />
+					</span>
+				</div>
+				<div th:unless="${db_entry}">
+					<input type="radio" name="dish" value="LEMMING_RAGU" />
+				</div>
+				<div th:if="${helper}">
+					<span class="price" th:text="${helper.getMainDishPrice(T(lexicon.task.Dish).LEMMING_RAGU)}">
+					</span>
+					<span class="currency" th:text="${helper.getCurrency()}">
+					</span>
+				</div>
+				<p><img class="dish" th:src="@{/gfx/dishes/lemming_ragu.PNG}" alt="Lemming Ragu" /></p>
+			</td>
+			<td>
+				<!-- ====================== -->
+				<!-- Five Finger Love Punch -->
+				<!-- ====================== -->
+
+				<h4>Five Finger Love Punch</h4>
+				<div th:if="${db_entry}" th:switch="${db_entry.getDish()}">
+					<span th:case="${T(lexicon.task.Dish).FIVE_FINGER_LOVE_PUNCH}">
+						<input type="radio" name="dish" value="FIVE_FINGER_LOVE_PUNCH" checked="checked" />
+					</span>
+					<span th:case="*">
+						<input type="radio" name="dish" value="FIVE_FINGER_LOVE_PUNCH" />
+					</span>
+				</div>
+				<div th:unless="${db_entry}">
+					<input type="radio" name="dish" value="FIVE_FINGER_LOVE_PUNCH" />
+				</div>
+				<div th:if="${helper}">
+					<span class="price" th:text="${helper.getMainDishPrice(T(lexicon.task.Dish).FIVE_FINGER_LOVE_PUNCH)}">
+					</span>
+					<span class="currency" th:text="${helper.getCurrency()}">
+					</span>
+				</div>
+				<p><img class="dish" th:src="@{/gfx/dishes/five_finger_love_punch.PNG}" alt="Five Finger Love Punch" /></p>
+			</td>
+			<td>
+				<!-- =================== -->
+				<!-- Moby Dick's Lasagna -->
+				<!-- =================== -->
+
+				<h4>Moby Dick's Lasagna</h4>
+				<div th:if="${db_entry}" th:switch="${db_entry.getDish()}">
+					<span th:case="${T(lexicon.task.Dish).MOBY_DICKS_LASAGNA}">
+						<input type="radio" name="dish" value="MOBY_DICKS_LASAGNA" checked="checked" />
+					</span>
+					<span th:case="*">
+						<input type="radio" name="dish" value="MOBY_DICKS_LASAGNA" />
+					</span>
+				</div>
+				<div th:unless="${db_entry}">
+					<input type="radio" name="dish" value="MOBY_DICKS_LASAGNA" />
+				</div>
+				<div th:if="${helper}">
+					<span class="price" th:text="${helper.getMainDishPrice(T(lexicon.task.Dish).MOBY_DICKS_LASAGNA)}">
+					</span>
+					<span class="currency" th:text="${helper.getCurrency()}">
+					</span>
+				</div>
+				<p><img class="dish" th:src="@{/gfx/dishes/moby_dicks_lasagna.PNG}" alt="Moby Dick's Lasagna" /></p>
+			</td>
+			<td>
+				<!-- ================= -->
+				<!-- Leo's Jollof Rice -->
+				<!-- ================= -->
+
+				<h4>Leo's Jollof Rice</h4>
+				<div th:if="${db_entry}" th:switch="${db_entry.getDish()}">
+					<span th:case="${T(lexicon.task.Dish).LEOS_JOLLOF_RICE}">
+						<input type="radio" name="dish" value="LEOS_JOLLOF_RICE" checked="checked" />
+					</span>
+					<span th:case="*">
+						<input type="radio" name="dish" value="LEOS_JOLLOF_RICE" />
+					</span>
+				</div>
+				<div th:unless="${db_entry}">
+					<input type="radio" name="dish" value="LEOS_JOLLOF_RICE" />
+				</div>
+				<div th:if="${helper}">
+					<span class="price" th:text="${helper.getMainDishPrice(T(lexicon.task.Dish).LEOS_JOLLOF_RICE)}">
+					</span>
+					<span class="currency" th:text="${helper.getCurrency()}">
+					</span>
+				</div>
+				<p><img class="dish" th:src="@{/gfx/dishes/leos_jollof_rice.png}" alt="Leo's Jollof Rice" /></p>
+			</td>
+		</tr>
+
+<!-- ============ -->
+<!-- NO MAIN DISH -->
+<!-- ============ -->
+		<tr>
+			<td>
+				<div th:if="${db_entry}" th:switch="${db_entry.getDish()}">
+					<span th:case="${T(lexicon.task.Dish).NO_DISH}">
+						<input type="radio" name="dish" value="NO_DISH" checked="checked" />
+					</span>
+					<span th:case="*">
+						<input type="radio" name="dish" value="NO_DISH" />
+					</span>
+					<em>No main dish</em>
+				</div>
+				<div th:unless="${db_entry}">
+					<input type="radio" name="dish" value="NO_DISH" checked="checked" />
+					<em>No main dish</em>
+				</div>
+			</td>
+		</tr>
+
+<!-- ============== -->
+<!-- error handling -->
+<!-- ============== -->
+		<tr>
+			<td>
+				<span class="errmsg" th:if="${#fields.hasErrors('dish')}" th:errors="*{dish}">
+				</span>
+			</td>
+		</tr>
+	</table>
+
+	<h3>Add ons</h3>
+	<p>
+	Each add on for
+	<span class="price" th:text="${helper.getAddonPrice()}">
+	</span>
+	<span class="currency" th:text="${helper.getCurrency()}">
+	</span>.
+	</p>
+	<table>
+		<tr>
+			<!-- ============ -->
+			<!-- French Fries -->
+			<!-- ============ -->
+
+			<td th:if="${db_entry}">
+				<div th:switch="${db_entry.getFrenchFries()}">
+					<span th:case="${T(Boolean).TRUE}">
+						<input type="checkbox" id="frenchFries" name="frenchFries" checked="checked" />
+					</span>
+					<span th:case="*">
+						<input type="checkbox" th:field="*{frenchFries}" />
+					</span>
+				</div>
+			</td>
+			<td th:unless="${db_entry}">
+				<input type="checkbox" th:field="*{frenchFries}" />
+			</td>
+			<td>French Fries</td>
+		</tr>
+		<tr>
+			<!-- ==== -->
+			<!-- Rice -->
+			<!-- ==== -->
+
+			<td th:if="${db_entry}">
+				<div th:switch="${db_entry.getRice()}">
+					<span th:case="${T(Boolean).TRUE}">
+						<input type="checkbox" id="rice" name="rice" checked="checked" />
+					</span>
+					<span th:case="*">
+						<input type="checkbox" th:field="*{rice}" />
+					</span>
+				</div>
+			</td>
+			<td th:unless="${db_entry}">
+				<input type="checkbox" th:field="*{rice}" />
+			</td>
+			<td>Rice</td>
+		</tr>
+		<tr>
+			<!-- ============ -->
+			<!-- Baked Potato -->
+			<!-- ============ -->
+
+			<td th:if="${db_entry}">
+				<div th:switch="${db_entry.getBakedPotato()}">
+					<span th:case="${T(Boolean).TRUE}">
+						<input type="checkbox" id="bakedPotato" name="bakedPotato" checked="checked" />
+					</span>
+					<span th:case="*">
+						<input type="checkbox" th:field="*{bakedPotato}" />
+					</span>
+				</div>
+			</td>
+			<td th:unless="${db_entry}">
+				<input type="checkbox" th:field="*{bakedPotato}" />
+			</td>
+			<td>Baked Potato</td>
+		</tr>
+		<tr>
+			<!-- =========== -->
+			<!-- Potato mash -->
+			<!-- =========== -->
+
+			<td th:if="${db_entry}">
+				<div th:switch="${db_entry.getPotatoMash()}">
+					<span th:case="${T(Boolean).TRUE}">
+						<input type="checkbox" id="potatoMash" name="potatoMash" checked="checked" />
+					</span>
+					<span th:case="*">
+						<input type="checkbox" th:field="*{potatoMash}" />
+					</span>
+				</div>
+			</td>
+			<td th:unless="${db_entry}">
+				<input type="checkbox" th:field="*{potatoMash}" />
+			</td>
+			<td>Potato mash</td>
+		</tr>
+		<tr>
+			<!-- ============= -->
+			<!-- Potato wedges -->
+			<!-- ============= -->
+
+			<td th:if="${db_entry}">
+				<div th:switch="${db_entry.getPotatoWedges()}">
+					<span th:case="${T(Boolean).TRUE}">
+						<input type="checkbox" id="potatoWedges" name="potatoWedges" checked="checked" />
+					</span>
+					<span th:case="*">
+						<input type="checkbox" th:field="*{potatoWedges}" />
+					</span>
+				</div>
+			</td>
+			<td th:unless="${db_entry}">
+				<input type="checkbox" th:field="*{potatoWedges}" />
+			</td>
+			<td>Potato wedges</td>
+		</tr>
+	</table>
+
+	<h3>Choice of drink</h3>
+	<table>
+		<tr>
+			<td><span class="field_name">Amount of drinks</span></td>
+			<td th:if="${db_entry == null}">
+				<input class="text" type="text" id="amountOfDrinks" name="amountOfDrinks" th:value="1" />
+			</td>
+			<td th:if="${db_entry != null}">
+				<input class="text" type="text" id="amountOfDrinks" name="amountOfDrinks" th:value="${db_entry.getAmountOfDrinks()}" />
+			</td>
+			<td class="errmsg" th:if="${#fields.hasErrors('amountOfDrinks')}" th:errors="*{amountOfDrinks}">
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+		</tr>
+	</table>
+	<table>
+		<tr>
+			<!-- ==== -->
+			<!-- Beer -->
+			<!-- ==== -->
+
+			<td th:if="${db_entry}" th:switch="${db_entry.getDrink()}">
+				<span th:case="${T(lexicon.task.Drink).BEER}">
+					<input type="radio" name="drink" value="BEER" checked="checked" />
+				</span>
+				<span th:case="*">
+					<input type="radio" name="drink" value="BEER" />
+				</span>
+			</td>
+			<td th:unless="${db_entry}">
+				<input type="radio" name="drink" value="BEER" />
+			</td>
+			<td>Beer</td>
+			<td th:if="${helper}">
+				<span class="price" th:text="${helper.getDrinkPrice(T(lexicon.task.Drink).BEER)}">
+				</span>
+				<span class="currency" th:text="${helper.getCurrency()}">
+				</span>
+			</td>
+		</tr>
+		<tr>
+			<!-- ========== -->
+			<!-- Lime water -->
+			<!-- ========== -->
+
+			<td th:if="${db_entry}" th:switch="${db_entry.getDrink()}">
+				<span th:case="${T(lexicon.task.Drink).LIME_WATER}">
+					<input type="radio" name="drink" value="LIME_WATER" checked="checked" />
+				</span>
+				<span th:case="*">
+					<input type="radio" name="drink" value="LIME_WATER" />
+				</span>
+			</td>
+			<td th:unless="${db_entry}">
+				<input type="radio" name="drink" value="LIME_WATER" />
+			</td>
+			<td>Lime water</td>
+			<td th:if="${helper}">
+				<span class="price" th:text="${helper.getDrinkPrice(T(lexicon.task.Drink).LIME_WATER)}">
+				</span>
+				<span class="currency" th:text="${helper.getCurrency()}">
+				</span>
+			</td>
+		</tr>
+		<tr>
+			<!-- =========== -->
+			<!-- Lemon water -->
+			<!-- =========== -->
+
+			<td th:if="${db_entry}" th:switch="${db_entry.getDrink()}">
+				<span th:case="${T(lexicon.task.Drink).LEMON_WATER}">
+					<input type="radio" name="drink" value="LEMON_WATER" checked="checked" />
+				</span>
+				<span th:case="*">
+					<input type="radio" name="drink" value="LEMON_WATER" />
+				</span>
+			</td>
+			<td th:unless="${db_entry}">
+				<input type="radio" name="drink" value="LEMON_WATER" />
+			</td>
+			<td>Lemon water</td>
+			<td th:if="${helper}">
+				<span class="price" th:text="${helper.getDrinkPrice(T(lexicon.task.Drink).LEMON_WATER)}">
+				</span>
+				<span class="currency" th:text="${helper.getCurrency()}">
+				</span>
+			</td>
+		</tr>
+		<tr>
+			<!-- ============= -->
+			<!-- Mineral water -->
+			<!-- ============= -->
+
+			<td th:if="${db_entry}" th:switch="${db_entry.getDrink()}">
+				<span th:case="${T(lexicon.task.Drink).MINERAL_WATER}">
+					<input type="radio" name="drink" value="MINERAL_WATER" checked="checked" />
+				</span>
+				<span th:case="*">
+					<input type="radio" name="drink" value="MINERAL_WATER" />
+				</span>
+			</td>
+			<td th:unless="${db_entry}">
+				<input type="radio" name="drink" value="MINERAL_WATER" />
+			</td>
+			<td>Mineral water</td>
+			<td th:if="${helper}">
+				<span class="price" th:text="${helper.getDrinkPrice(T(lexicon.task.Drink).MINERAL_WATER)}">
+				</span>
+				<span class="currency" th:text="${helper.getCurrency()}">
+				</span>
+			</td>
+		</tr>
+		<tr>
+			<!-- ======== -->
+			<!-- Red wine -->
+			<!-- ======== -->
+
+			<td th:if="${db_entry}" th:switch="${db_entry.getDrink()}">
+				<span th:case="${T(lexicon.task.Drink).RED_WINE}">
+					<input type="radio" name="drink" value="RED_WINE" checked="checked" />
+				</span>
+				<span th:case="*">
+					<input type="radio" name="drink" value="RED_WINE" />
+				</span>
+			</td>
+			<td th:unless="${db_entry}">
+				<input type="radio" name="drink" value="RED_WINE" />
+			</td>
+			<td>Red wine</td>
+			<td th:if="${helper}">
+				<span class="price" th:text="${helper.getDrinkPrice(T(lexicon.task.Drink).RED_WINE)}">
+				</span>
+				<span class="currency" th:text="${helper.getCurrency()}">
+				</span>
+			</td>
+		</tr>
+		<tr>
+			<!-- ======== -->
+			<!-- No drink -->
+			<!-- ======== -->
+
+			<td th:if="${db_entry}" th:switch="${db_entry.getDrink()}">
+				<span th:case="${T(lexicon.task.Drink).NO_DRINK}">
+					<input type="radio" name="drink" value="NO_DRINK" checked="checked" />
+				</span>
+				<span th:case="*">
+					<input type="radio" name="drink" value="NO_DRINK" />
+				</span>
+			</td>
+			<td th:unless="${db_entry}">
+				<input type="radio" name="drink" value="NO_DRINK" checked="checked" />
+			</td>
+			<td>Neither</td>
+			<td>(if chosen amount of drinks field is ignored)</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td class="errmsg" th:if="${#fields.hasErrors('drink')}" th:errors="*{drink}">
+			</td>
+		</tr>
+	</table>
+
+	<table>
+		<tr>
+			<td><span class="field_name">Special treats</span></td>
+			<td th:if="${db_entry == null}">
+				<input class="text" type="text" id="specialTreats" name="specialTreats" value="None" />
+			</td>
+			<td th:if="${db_entry != null}">
+				<input class="text" type="text" id="specialTreats" name="specialTreats" th:value="${db_entry.getSpecialTreats()}" />
+			</td>
+			<td class="errmsg" th:if="${#fields.hasErrors('specialTreats')}" th:errors="*{specialTreats}">
+			</td>
+		</tr>
+		<tr>
+			<td><span class="field_name">Employee</span></td>
+			<td th:if="${db_entry == null}">
+				<input class="text" type="text" th:field="*{employee}" />
+			</td>
+			<td th:if="${db_entry != null}">
+				<input class="text" type="text" id="employee" name="employee" th:value="${db_entry.getEmployee()}" />
+			</td>
+			<td class="errmsg" th:if="${#fields.hasErrors('employee')}" th:errors="*{employee}">
+			</td>
+		</tr>
+	</table>
+
+	<span th:if="${db_entry}">
+		<input type="hidden" name="id" th:value="${db_entry.id}" />
+	</span>
+	<span th:unless="${db_entry}">
+		<input type="hidden" name="id" th:value="-1" />
+	</span>
+
+	<p>
+	<input type="submit" value="Submit" />
+	<input type="reset" value="Reset" />
+	</p>
+</form>
+</div>
+
+<div th:replace="fragments/bottom :: bottom"></div>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Halvarsson &amp;CO: Kitchen View</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link th:href="@{/css/style.css}" rel="STYLESHEET" type="text/css" />
+<style>
+#db th {
+	text-align: left;
+}
+#db {
+	text-align: left;
+	width: 100%;
+}
+span.dish, span.drink {
+	font-weight: bold;
+}
+span.no {
+	color: red;
+	font-weight: bold;
+}
+span.yes {
+	color: mediumseagreen;
+	font-weight: bold;
+}
+td.customer {
+	color: silver;
+	font-weight: bold;
+}
+td.time {
+	color: tan;
+}
+</style>
+</head>
+
+<body>
+<div th:replace="fragments/top :: top"></div>
+<div th:replace="fragments/navigation :: navigation"></div>
+
+<div id="middle">
+<h2>Kitchen View</h2>
+<table id="db">
+<tr>
+	<th>Time</th>
+	<th>Table number</th>
+	<th>Customer</th>
+	<th>Dish</th>
+	<th>French Fries</th>
+	<th>Rice</th>
+	<th>Baked Potato</th>
+	<th>Potato mash</th>
+	<th>Potato wedges</th>
+	<th>Drink</th>
+	<th>&nbsp;</th>
+</tr>
+<tr th:each="entry: ${db_entries}">
+	<td class="time"     th:text="${entry.getTime()}" />
+	<td class=""         th:text="${entry.getTableNo()}" />
+	<td class="customer" th:text="${entry.getCustomer()}" />
+	<td>
+		<span class="dish" th:text="${helper.getMainDishName(entry.getDish())}">
+		</span>
+		<br />
+		<strong>Special treats:</strong>
+		<span class="" th:text="${entry.getSpecialTreats()}">
+		</span>
+	</td>
+	<td th:switch="${entry.getFrenchFries()}">
+		<span class="yes" th:case="${T(Boolean).TRUE}">yes</span>
+		<span class="no" th:case="*">no</span>
+	</td>
+	<td th:switch="${entry.getRice()}">
+		<span class="yes" th:case="${T(Boolean).TRUE}">yes</span>
+		<span class="no" th:case="*">no</span>
+	</td>
+	<td th:switch="${entry.getBakedPotato()}">
+		<span class="yes" th:case="${T(Boolean).TRUE}">yes</span>
+		<span class="no" th:case="*">no</span>
+	</td>
+	<td th:switch="${entry.getPotatoMash()}">
+		<span class="yes" th:case="${T(Boolean).TRUE}">yes</span>
+		<span class="no" th:case="*">no</span>
+	</td>
+	<td th:switch="${entry.getPotatoWedges()}">
+		<span class="yes" th:case="${T(Boolean).TRUE}">yes</span>
+		<span class="no" th:case="*">no</span>
+	</td>
+	<td>
+		<span class="drink" th:text="${helper.getDrinkName(entry.getDrink())}">
+		</span>
+	</td>
+	<td>
+		<form action="#" th:action="@{/finish}" method="post">
+			<input type="hidden" name="id" th:value="${entry.id}" />
+			<p><input type="submit" value="Finish Order" /></p>
+		</form>
+		<form action="#" th:action="@{/edit}" method="post">
+			<input type="hidden" name="id" th:value="${entry.id}" />
+			<p><input type="submit" value="Edit Order" /></p>
+		</form>
+	</td>
+</tr>
+</table>
+</div>
+
+<div th:replace="fragments/bottom :: bottom"></div>
+</body>
+</html>

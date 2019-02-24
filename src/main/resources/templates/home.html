@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Halvarsson &amp;CO</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link th:href="@{/css/style.css}" rel="STYLESHEET" type="text/css" />
+<style>
+.failure {
+	color: red;
+	font-weight: bold;
+}
+.success {
+	color: mediumseagreen;
+	font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+<div th:replace="fragments/top :: top"></div>
+<div th:replace="fragments/navigation :: navigation"></div>
+
+<div id="middle">
+<h2>Welcome</h2>
+<p>
+Welcome to Halvarsson &amp;CO booking system.<br />
+FOR CREW ONLY.
+</p>
+
+<p class="failure" th:if="${param.error}">
+Invalid username and password.
+</p>
+<p class="success" th:if="${param.logout}">
+You have been logged out.
+</p>
+
+<!-- Sign In -->
+<form th:action="@{/home}" method="post">
+<table>
+	<tr>
+		<td><span class="field_name">Username</span></td>
+		<td><input class="text" type="text" name="username" /></td>
+	</tr>
+	<tr>
+		<td><span class="field_name">Password</span></td>
+		<td><input class="text" type="password" name="password" /></td>
+	</tr>
+</table>
+<p><input type="submit" value="Sign In" /></p>
+</form>
+
+<!-- Sign Out -->
+<form th:action="@{/logout}" method="post">
+	<p><input type="submit" value="Sign Out" /></p>
+</form>
+</div>
+
+<div th:replace="fragments/bottom :: bottom"></div>
+</body>
+</html>

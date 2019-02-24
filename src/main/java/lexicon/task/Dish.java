@@ -1,0 +1,10 @@
+package lexicon.task;
+
+public enum Dish {
+	SALMON_HALVARSSON,
+	LEMMING_RAGU,
+	FIVE_FINGER_LOVE_PUNCH,
+	MOBY_DICKS_LASAGNA,
+	LEOS_JOLLOF_RICE,
+	NO_DISH
+}

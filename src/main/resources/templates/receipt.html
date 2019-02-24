@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Halvarsson &amp;CO: Receipt</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link th:href="@{/css/style.css}" rel="STYLESHEET" type="text/css" />
+<style>
+#data {
+	border-bottom: 1px solid black;
+	width: 400px;
+}
+#specification {
+	border-bottom: 1px solid black;
+	width: 400px;
+}
+.itemcol {
+	color: tan;
+	font-weight: bold;
+}
+span.addon {
+	color: black;
+}
+</style>
+</head>
+<body>
+<div th:replace="fragments/top :: top"></div>
+<div th:replace="fragments/navigation :: navigation"></div>
+
+<div id="middle">
+<h2>Receipt</h2>
+<table id="data">
+	<tr>
+		<td class="itemcol">Customer</td>
+		<td th:text="${db_entry.getCustomer()}" />
+	</tr>
+	<tr>
+		<td class="itemcol">Table no.</td>
+		<td th:text="${db_entry.getTableNo()}" />
+	</tr>
+	<tr>
+		<td class="itemcol">Order time</td>
+		<td th:text="${db_entry.getTime()}" />
+	</tr>
+	<tr>
+		<td class="itemcol">Special treats</td>
+		<td th:text="${db_entry.getSpecialTreats()}" />
+	</tr>
+	<tr>
+		<td class="itemcol">Served by</td>
+		<td th:text="${db_entry.getEmployee()}" />
+	</tr>
+</table>
+
+<h3>Specification</h3>
+<table id="specification">
+	<tr>
+		<td>
+			<span style="" th:text="${helper.getMainDishName(db_entry.getDish())}">
+			</span>
+		</td>
+		<td>
+			<span class="price" th:text="${helper.getMainDishPrice(db_entry.getDish())}">
+			</span>
+			<span class="currency" th:text="${helper.getCurrency()}">
+			</span>
+		</td>
+	</tr>
+
+	<!-- French Fries -->
+	<tr th:if="${db_entry.getFrenchFries()}">
+		<td><span class="addon">French Fries</span></td>
+		<td>
+			<span class="price" th:text="${helper.getAddonPrice()}">
+			</span>
+			<span class="currency" th:text="${helper.getCurrency()}">
+			</span>
+		</td>
+	</tr>
+
+	<!-- Rice -->
+	<tr th:if="${db_entry.getRice()}">
+		<td><span class="addon">Rice</span></td>
+		<td>
+			<span class="price" th:text="${helper.getAddonPrice()}">
+			</span>
+			<span class="currency" th:text="${helper.getCurrency()}">
+			</span>
+		</td>
+	</tr>
+
+	<!-- Baked Potato -->
+	<tr th:if="${db_entry.getBakedPotato()}">
+		<td><span class="addon">Baked Potato</span></td>
+		<td>
+			<span class="price" th:text="${helper.getAddonPrice()}">
+			</span>
+			<span class="currency" th:text="${helper.getCurrency()}">
+			</span>
+		</td>
+	</tr>
+
+	<!-- Potato mash -->
+	<tr th:if="${db_entry.getPotatoMash()}">
+		<td><span class="addon">Potato mash</span></td>
+		<td>
+			<span class="price" th:text="${helper.getAddonPrice()}">
+			</span>
+			<span class="currency" th:text="${helper.getCurrency()}">
+			</span>
+		</td>
+	</tr>
+
+	<!-- Potato wedges -->
+	<tr th:if="${db_entry.getPotatoWedges()}">
+		<td><span class="addon">Potato wedges</span></td>
+		<td>
+			<span class="price" th:text="${helper.getAddonPrice()}">
+			</span>
+			<span class="currency" th:text="${helper.getCurrency()}">
+			</span>
+		</td>
+	</tr>
+
+	<!-- Drink -->
+	<tr>
+		<td>
+			<span style="" th:text="${helper.getDrinkName(db_entry.getDrink())}">
+			</span>
+		</td>
+		<td th:if="${db_entry.getDrink() != T(lexicon.task.Drink).NO_DRINK}">
+			<span class="price" th:text="${helper.getDrinkPrice(db_entry.getDrink())}">
+			</span>
+			<span class="currency" th:text="${helper.getCurrency()}">
+			</span>
+			<em>Amount:</em>
+			<span class="" th:text="${db_entry.getAmountOfDrinks()}">
+			</span>
+		</td>
+		<td th:if="${db_entry.getDrink() == T(lexicon.task.Drink).NO_DRINK}">
+			<span class="price" th:text="${helper.getDrinkPrice(db_entry.getDrink())}">
+			</span>
+			<span class="currency" th:text="${helper.getCurrency()}">
+			</span>
+		</td>
+	</tr>
+</table>
+<p>
+	<strong>Total</strong><br />
+	<span class="price" th:text="${db_entry.getOrderTotal()}">
+	</span>
+	<span class="currency" th:text="${helper.getCurrency()}">
+	</span>
+</p>
+<p>
+<button onClick="printReceipt()">Print receipt</button><br /><br />
+Order finished!
+</p>
+</div>
+
+<div th:replace="fragments/bottom :: bottom"></div>
+<script>
+function printReceipt() {
+	window.print();
+}
+</script>
+</body>
+</html>
