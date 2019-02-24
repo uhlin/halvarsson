@@ -12,7 +12,7 @@ for helping me to improve the project.
 
 To clone the repository use [Git](https://git-scm.com).
 
-    $ git clone https://github.com/java1711/halvarsson-markus.git
+    $ git clone https://github.com/uhlin/halvarsson.git
 
 ## Config ##
 
@@ -38,7 +38,7 @@ First clone the repository and make sure that
 [Maven](https://maven.apache.org/)
 is installed, as well as JRE, and then:
 
-    $ cd /path/to/halvarsson-markus
+    $ cd /path/to/halvarsson
     $ mvn package
 
 If the building succeeds (which it should) you should have a runnable
